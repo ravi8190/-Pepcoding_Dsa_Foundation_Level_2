@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long int ncr(long int n, long int r){
+        if(n < r){
+            return 0L;    
+        }
+        
+        long res = 1L;
+        
+        for(long int i = 0L; i < r; i++){
+            res = res * (n - i);
+            res = res / (i + 1);
+        }
+        
+        return res;
+    }
+    
+long int solution(long int n, int k, int i) {
+        if(i == 0)
+        {
+            return 0;    
+        }
+        
+        long int mask = 1L << i;
+        
+        long int res = 0;
+        
+        if((n & mask) == 0){
+            res = solution(n, k, i - 1);
+        } else {
+            long int res1 = solution(n, k - 1, i - 1);
+            long int res0 = ncr(i, k);
+            res = res1 + res0;
+        }
+        
+        return res;
+    }
+    
+    int csb(long int n){
+        int res = 0;
+        
+        while(n > 0){
+            long int rsb = n & -n;
+            n -= rsb;
+            res++;
+        }
+        
+        return res;
+    }
+    
+int main()
+{
+	    int long n;cin>>n;
+        int k = csb(n);
+        cout<<(solution(n, k, 63));
+    }
