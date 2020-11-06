@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void solution(int a[],int n)
+{
+    int xorr = 0;
+    for(int i=0;i<n;i++)
+    {
+        xorr ^=a[i];
+    }
+    for(int i=1;i<=n;i++)
+    {
+        xorr ^=i;
+    }
+    
+    int rsb = xorr &( (~xorr)+1);
+    int x = 0;
+    int y = 0;
+    for(int i = 0 ; i < n; i++)
+    {
+      if((rsb & a[i]) == 0){
+        x ^= a[i];
+      }else{
+        y ^= a[i];
+      }
+    }
+    
+     for(int i = 1 ; i <=n; i++){
+       if((rsb & i) == 0){
+           x ^= i;
+       }else{
+           y ^= i;
+       }
+   }
+    
+    for(int i = 0 ; i < n; i++){
+       if(a[i] == x){
+           cout<<"Missing Number -> "<<y<<endl;
+           cout<<"Repeating Number -> "<<x<<endl;
+           break;
+       }
+       
+       if(a[i] == y){
+           cout<<"Missing Number -> "<<x<<endl;
+           cout<<"Repeating Number -> "<<y<<endl;
+           break;
+       }
+   }
+}
+
+int main()
+{
+    int n;cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    cin>>a[i];
+    solution(a,n);
+}
