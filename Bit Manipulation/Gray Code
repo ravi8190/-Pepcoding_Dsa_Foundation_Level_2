@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+#include<bitset>
+using namespace std;
+
+void grayCodeUtil(vector<int>& res, int n, int& num) 
+{ 
+    // base case when we run out bits to process 
+    // we simply include it in gray code sequence. 
+    if (n == 0) { 
+        res.push_back(num); 
+        return; 
+    } 
+  
+    // ignore the bit. 
+    grayCodeUtil(res, n - 1, num); 
+  
+    // invert the bit. 
+    num = num ^ (1 << (n - 1)); 
+    grayCodeUtil(res, n - 1, num); 
+} 
+  
+// returns the vector containing the gray  
+// code sequence of n bits. 
+vector<int> grayCodes(int n) 
+{ 
+    vector<int> res; 
+  
+    // num is passed by reference to keep 
+    // track of current code. 
+    int num = 0; 
+    grayCodeUtil(res, n, num); 
+  
+    return res; 
+} 
+ 
+int main()
+{
+    int n;cin>>n;
+    vector<int> code = grayCodes(n);
+    sort(code.begin(), code.end());
+    cout<<"[";
+    for (int i = 0; i < code.size(); i++) 
+    {
+        cout << code[i];
+        
+        if(i!=code.size()-1)
+        cout<<","<<" ";
+    }
+    cout<<"]"<<endl;
+}
