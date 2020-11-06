@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int a,b;cin>>a>>b;
+    int left,right;cin>>left>>right;
+    
+    int mask = (1<<(right-left+1));
+    mask--;
+    mask= (mask<<(left-1));
+    
+    mask=(mask&a);
+    b=b|mask;
+    cout<<b;
+    
+    
+}
