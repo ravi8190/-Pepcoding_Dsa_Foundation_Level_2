@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void solution(int a[],int n)
+{
+    int xorr = 0;
+    for(int i=0;i<n;i++)
+    {
+        xorr ^=a[i];
+    }
+    int rsb = xorr & ~(xorr - 1);
+    int x = 0;
+    int y = 0;
+    for(int i = 0 ; i < n; i++)
+    {
+      if((a[i] & rsb) == 0){
+        x ^= a[i];
+      }else{
+        y ^= a[i];
+      }
+    }
+    
+    if(x < y)
+    {
+      cout<<(x)<<endl;
+       cout<<(y)<<endl;
+    }
+    
+    else
+    {
+      cout<<(y)<<endl;
+       cout<<(x)<<endl;
+    }
+    
+}
+
+int main()
+{
+    int n;cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    cin>>a[i];
+    solution(a,n);
+}
