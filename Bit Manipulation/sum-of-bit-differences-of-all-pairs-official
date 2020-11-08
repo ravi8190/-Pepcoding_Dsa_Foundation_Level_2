@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long int solution(int arr[],int n)
+{
+    long int  ans = 0;
+    for (int i = 0; i < 32; i++) 
+    { 
+      long int counton = 0; 
+      
+      for (int val=0;val<n;val++)
+      { 
+        if((arr[val] & (1 << i))!= 0)
+        { 
+            counton++;
+        }
+      }   
+      long countoff = n-counton;
+      long diff = counton * countoff*2;
+      ans += diff;
+    }
+    cout<<ans;
+    // return ans; 
+    
+  }
+  
+int main()
+{
+    int n;cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++)
+    cin>>arr[i];
+    solution(arr,n);
+   
+}
