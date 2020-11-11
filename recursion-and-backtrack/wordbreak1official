@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void wordBreak(string str,string ans,set<string>dict)
+{
+    if(str.length()==0)
+    {
+        cout<<ans<<endl;
+        return;
+    }
+    
+    for(int i=0;i<str.length();i++)
+    {
+        string left = str.substr(0,i+1);
+        if(dict.count(left)>0)
+        {
+            string right = str.substr(i+1);
+            wordBreak(right,ans+left+" ",dict);
+        }
+    }
+}
+
+int main()
+{
+    int n;cin>>n;
+    set<string>dict;
+    for(int i=0;i<n;i++)
+    {
+        string str1;
+        cin>>str1;
+        dict.insert(str1);
+    }
+    string sentence;cin>>sentence;
+    wordBreak(sentence,"",dict);
+    
+}
