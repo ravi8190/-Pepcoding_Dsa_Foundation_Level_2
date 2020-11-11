@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void soluton(string str,string pattern,unordered_map<char,string> mapi,string op)
+{
+    if(pattern.length()==0)
+    {
+        if(str.length()==0)
+        {
+            set<char> alreadyprinted;
+            for(int i=0;i<op.length();i++)
+            {
+                char ch=op[i];
+                if(alreadyprinted.count(ch)>0)
+                {
+                    continue;
+                }else{
+                   cout<<ch<<" -> "<<mapi.at(ch)<<", ";
+                    alreadyprinted.insert(ch); 
+                }
+            }
+            cout<<"."<<endl;
+        }
+        return;
+    }
+    
+    char ch = pattern[0];
+    string rop = pattern.substr(1);
+    
+    if(mapi.find(ch)!=mapi.end())
+    {
+        string priviousmapping = mapi.at(ch);
+        if(str.length()>=priviousmapping.length()){
+            string left = str.substr(0,priviousmapping.length());
+            string right = str.substr(priviousmapping.length());
+            
+            if(priviousmapping==left)
+            {
+                soluton(right,rop,mapi,op);
+            }
+        }
+    }else{
+        for(int i=0;i<str.length();i++)
+        {
+            string left = str.substr(0,i+1);
+            string right = str.substr(i+1);
+            
+            mapi.insert({ch,left});
+            soluton(right,rop,mapi,op);
+            mapi.erase(ch);
+        }
+    }
+}
+
+int main()
+{
+    string str,pattern;
+    cin>>str>>pattern;
+    
+    unordered_map<char,string> mapi;
+    soluton(str,pattern,mapi,pattern);
+}
