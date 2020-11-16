@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void generateWords(int cs, int ts, map<char,int> fmap, string asf)
+{
+    if(cs>ts)
+    {
+        cout<<asf<<endl;
+        return;
+    }
+    
+    for(auto p:fmap)
+    {
+        if(p.second>0)
+        {
+        //p.second--;
+        fmap[p.first]--;
+        // cout<<p.first<<" "<<p.second<<" "<<endl;
+        generateWords(cs+1,ts,fmap,asf+p.first);
+        fmap[p.first]++;
+        // cout<<p.first<<" "<<p.second<<" "<<endl;
+        }
+    }
+}
+
+int main()
+{
+    string str;cin>>str;
+    map<char,int> fmap;
+    for(int i=0;i<str.length();i++)
+    {
+        fmap[str[i]]++;
+    }
+    
+    generateWords(1, str.length(), fmap, "");
+}
