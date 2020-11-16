@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+ void queensPermutations(int qpsf, int tq, int row, int col, string asf, int arr[])
+{
+    
+    if(row==tq)
+    {
+        if(qpsf==tq)
+        {
+            cout<<asf<<endl;
+            cout<<endl;
+        }
+        return;
+    }
+    
+    int nc=0;
+    int nr=0;
+    string seq=" ";
+    if(col==tq-1)
+    {
+        nr=row+1;
+        nc=0;
+        seq="
+";
+    }else{
+        nr=row;
+        nc=col+1;
+        seq="	";
+    }
+    
+    for(int i=0;i<tq;i++)
+    {
+            if(arr[i]==0)
+            {
+               arr[i]=1;
+               queensPermutations(qpsf+1,tq,nr,nc,asf+"q"+to_string(i+1)+seq,arr);
+               arr[i]=0;
+            }
+    }
+    queensPermutations(qpsf,tq,nr,nc,asf+"-"+seq,arr);
+}
+int main()
+{
+    int n;cin>>n;
+    int arr[n];
+
+    
+    for(int i=0;i<n;i++)
+    {
+        arr[i]=0;
+    }
+    queensPermutations(0, n, 0, 0, "", arr);
+}
