@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void queensCombinations(int qpsf, int tq, int **arr, int i, int j)
+{
+    if(qpsf==tq)
+    {
+    for(int row=0;row<tq;row++)
+    {
+        for(int col=0;col<tq;col++)
+        {
+            if(arr[row][col]==1)
+            {
+                cout<<"q	";
+            }else{
+                cout<<"-	";
+            }
+        }
+        cout<<endl;
+        
+    }
+    cout<<endl;
+    return;
+    }
+    
+    for(int col=j+1;col<tq;col++)
+    {
+        arr[i][col]=1;
+        queensCombinations(qpsf+1,tq,arr,i,col);
+        arr[i][col]=0;
+        
+    }
+    for(int row=i+1;row<tq;row++)
+    {
+        for(int col=0;col<tq;col++)
+        {
+            arr[row][col]=1;
+            queensCombinations(qpsf+1,tq,arr,row,col);
+            arr[row][col]=0;
+        }
+    }
+    
+}
+
+int main()
+{
+    int n;cin>>n;
+    
+    int **arr;
+    arr = new int *[n];
+    for(int i=0;i<n;i++)
+    arr[i]=new int[n];
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            arr[i][j]=0;
+        }
+    }
+    queensCombinations(0, n, arr, 0, -1);
+}
