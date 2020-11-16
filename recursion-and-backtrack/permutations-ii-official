@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+void permutations(int cb, int tb, int items[], int ssf, int ts, string asf)
+{
+    
+    if(cb>tb)
+    {
+        if(ssf==ts)
+        {
+            cout<<asf<<endl;
+            
+        }
+        return;
+    }
+    for(int i=0;i<ts;i++)
+    {
+        if(items[i]==0)
+        {
+            items[i]=1;
+            permutations(cb+1,tb,items,ssf+1,ts,asf+to_string(i+1));
+            items[i]=0;
+        }
+        
+    }
+    permutations(cb+1,tb,items,ssf,ts,asf+to_string(0));
+}
+int main()
+{
+    int nboxes,ritems;cin>>nboxes;cin>>ritems;
+    int arr[ritems]={0};
+    // for(int i=0;i<ritems;i++)
+    // arr[i]=0;
+    
+    permutations(1, nboxes,arr , 0, ritems, "");
+}
