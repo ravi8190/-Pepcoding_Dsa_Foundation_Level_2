@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void comb(bool boxes[],int ci,int ti,int llb,int nboxes)
+{
+    if(ci>ti)
+    {
+        for(int i=0;i<nboxes;i++)
+        {
+            if(boxes[i])
+            {
+                cout<<("i");
+            }
+            else
+            {
+                cout<<"-";
+            }
+        }
+    cout<<endl;
+    return;
+    }
+   
+    
+
+for(int b = llb + 1;b<nboxes;b++)
+{
+    if(boxes[b]==false)
+    {
+        boxes[b]=true;
+        comb(boxes,ci+1,ti,b,nboxes);
+        boxes[b]=false;
+    }
+}
+}
+
+int main()
+{
+    int nboxes;cin>>nboxes;
+    int ritems;cin>>ritems;
+    bool boxes[nboxes]={false};
+//     for(int i=0;i<nboxes;i++)
+// {
+//     boxes[i]=false;
+// }
+    comb(boxes,1,ritems,-1,nboxes);
+}
