@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void generateSelection(int i,string ustr,int ssf,int ts, string asf)
+{
+    if(i==ustr.length())
+    {
+    if(ssf==ts)
+    {
+        cout<<asf<<endl;
+    }
+    return;
+    }
+    
+    char ch=ustr[i];
+    generateSelection(i+1,ustr,ssf+1,ts,asf+ch);
+    generateSelection(i+1,ustr,ssf+0,ts,asf+"");
+}
+
+int main()
+{
+    string str;cin>>str;
+    int k;cin>>k;
+    set<char>unique;
+    string ustr="";
+    for(int i=0;i<str.length();i++)
+    {
+        char ch=str[i];
+        if(unique.count(ch)==0)
+        {
+            unique.insert(ch);
+            ustr+=ch;
+        }
+    }
+    
+    generateSelection(0,ustr,0,k,"");
+}
